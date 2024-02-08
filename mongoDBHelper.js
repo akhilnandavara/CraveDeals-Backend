@@ -15,3 +15,6 @@ exports.dbConnect = () => {
       process.exit(1);
     });
 };
+exports.dbClose=()=>{
+  mongoose.connection.close()
+}

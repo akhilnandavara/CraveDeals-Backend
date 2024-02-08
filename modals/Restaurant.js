@@ -6,11 +6,15 @@ const restaurantSchema = new mongoose.Schema({
     cuisine:String,
     zomatoOffers: [],
     swiggyOffers: [],
+    magicPinOffers: [],
     menu: [
         {
             name: String,
+            description: String,
+            image: String,
             swiggyPrice: String,
-            zomatoPrice: String
+            zomatoPrice: String,
+            magicPinPrice: String
         }
     ]
 });

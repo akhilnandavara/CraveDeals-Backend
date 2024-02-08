@@ -1,0 +1,640 @@
+{
+  "data": {
+    "About": {
+      "Name": "KFC",
+      "Ratings": "4.3",
+      "Locality": "Double Road",
+      "AreaName": "Shanti Nagar",
+      "City": "Bangalore",
+      "Cuisines": ["Burgers", "Biryani"]
+    },
+    "Menu": [
+      {
+        "title": "WEDNESDAY KFC SPECIALS (UP TO 46% OFF)",
+        "Dishes": [
+          {
+            "name": "Wednesday Chicken 10 Pc Hot & Crispy Bucket",
+            "description": "Enjoy the Special Wednesday Bucket with flat 37% off on 10 pcs of Hot & Crispy Chicken",
+            "inStock": false,
+            "isVeg": false,
+            "price": 719
+          },
+          {
+            "name": "Wednesday Chicken 12 Pc Strips Bucket",
+            "description": "Wednesdays are for Fun! Flat 46% off on 12 pc chicken Peri Peri Boneless Strips served with 4 delicious dips",
+            "inStock": false,
+            "isVeg": false,
+            "price": 449
+          }
+        ]
+      },
+      {
+        "title": "CHICKEN CHIZZA",
+        "Dishes": [
+          {
+            "name": "Chicken Chizza",
+            "description": "Crunchy chicken topped with cheese, spicy sauce, veggies & herbs. All-chicken-no-crust pizza! [Serves 1]",
+            "inStock": false,
+            "isVeg": false,
+            "price": 319
+          },
+          {
+            "name": "Chicken Chizza & Dessert Meal",
+            "description": "All-chicken-no-crust Chizza, Choco Lava Cake and a Pepsi PET 475ml at a deal price [Serves 1-2]",
+            "inStock": false,
+            "isVeg": false,
+            "price": 468
+          },
+          {
+            "name": "Chicken Chizza & Pepsi Combo",
+            "description": "1 Crunchy all-chicken-no-crust Chizza served with Pepsi PET 475ml [Serves 1]",
+            "inStock": false,
+            "isVeg": false,
+            "price": 376
+          },
+          {
+            "name": "Duo Chicken Chizza",
+            "description": "2 Crunchy all-chicken-no-crust Chizza topped with cheese, spicy sauce, veggies & herbs [Serves 2-3]",
+            "inStock": false,
+            "isVeg": false,
+            "price": 628
+          },
+          {
+            "name": "Chicken Chizza & Wings Meal",
+            "description": "All-chicken-no-crust Chizza, 2 Pc Hot Wings and a Pepsi PET 475ml at a deal price [Serves 1-2]",
+            "inStock": false,
+            "isVeg": false,
+            "price": 459
+          }
+        ]
+      },
+      {
+        "title": "RICE BOWLZ",
+        "Dishes": [
+          {
+            "name": "Plain Rice Bowlz",
+            "description": "New Plain Rice Bowlz",
+            "inStock": false,
+            "isVeg": true,
+            "price": 139
+          },
+          {
+            "name": "Popcorn Chicken Rice Bowlz & Wings Meal",
+            "description": "Deal Savings of Rs. 118 on 2 units of Popcorn Chicken Rice Bowlz and 8 Pc Hot Wings [Serves 3-4]",
+            "inStock": false,
+            "isVeg": false,
+            "price": 699
+          },
+          {
+            "name": "Veg Rice Bowlz",
+            "description": "Aromatic Veg rice bowl mixed with spicy gravy [serves 1]",
+            "inStock": false,
+            "isVeg": true,
+            "price": 199
+          },
+          {
+            "name": "Popcorn Chicken Rice Bowlz",
+            "description": "Aromatic Poprcorn Chicken rice bowl mixed with spicy gravy [serves 1]",
+            "inStock": false,
+            "isVeg": false,
+            "price": 229
+          },
+          {
+            "name": "Classic Chicken Rice Bowlz",
+            "description": "Aromatic Hot & Crispy Chicken rice bowl mixed with spicy gravy [serves 1]",
+            "inStock": false,
+            "isVeg": false,
+            "price": 229
+          },
+          {
+            "name": "Duo Popcorn Chicken Rice Bowlz",
+            "description": "Save Rs. 30 on aromatic Hot & Crispy Chicken rice bowl mixed with spicy gravy [serves 2]",
+            "inStock": false,
+            "isVeg": false,
+            "price": 428
+          }
+        ]
+      },
+      {
+        "title": "BURGERS",
+        "Dishes": [
+          {
+            "name": "Spicy Zinger Burger and Popcorn Meal",
+            "description": "New Spicy Zinger Burger with Medium Popcorn and Pepsi PET 475ml at a deal price",
+            "inStock": false,
+            "isVeg": false,
+            "price": 439
+          },
+          {
+            "name": "Zinger Pro Burger & Popcorn Meal",
+            "description": "New Zinger Pro premium Burger with Medium Popcorn and Pepsi PET 475ml at a deal price",
+            "inStock": false,
+            "isVeg": false,
+            "price": 459
+          },
+          {
+            "name": "Spicy Zinger Burger and Chicken Meal",
+            "description": "New Spicy Zinger Burger with 1 Pc Hot & Crispy and Pepsi PET 475ml at a deal price",
+            "inStock": false,
+            "isVeg": false,
+            "price": 379
+          },
+          {
+            "name": "Zinger Pro Burger",
+            "description": "Premium burger with crunchy chicken, Mexican Habanero sauce, cheese, tomato & onion",
+            "inStock": false,
+            "isVeg": false,
+            "price": 239
+          },
+          {
+            "name": "Zinger Pro Burger & Chicken Meal",
+            "description": "New Zinger Pro premium Burger with 1 Pc Hot & Crispy and Pepsi PET 475ml at a deal price",
+            "inStock": false,
+            "isVeg": false,
+            "price": 399
+          },
+          {
+            "name": "Chicken Burger Buddy Meal",
+            "description": "Save Rs. 40 & Share 2 Classic Chicken Zinger Burgers & a Medium Chicken Popcorn in this delightful combo for 2",
+            "inStock": false,
+            "isVeg": false,
+            "price": 528
+          },
+          {
+            "name": "Mixed Chicken Zinger Burger Doubles",
+            "description": "Save Rs.41 on Best-seller combo of classic chicken Zinger & Tandoori zinger burgers",
+            "inStock": false,
+            "isVeg": false,
+            "price": 368
+          },
+          {
+            "name": "Spicy Zinger Burger",
+            "description": "Spicy Bun & Spicy chilli sauce with Zinger Fillet, Lettuce, Onion and Tomatoes",
+            "inStock": false,
+            "isVeg": false,
+            "price": 219
+          },
+          {
+            "name": "Chicken Zinger Burger - Classic",
+            "description": "Signature chicken burger made with a crunchy chicken fillet, veggies & a delicious mayo sauce",
+            "inStock": false,
+            "isVeg": false,
+            "price": 199
+          },
+          {
+            "name": "Veg Zinger Burger",
+            "description": "Signature veg burger with crispy patties, veggies & a tangy sauce",
+            "inStock": false,
+            "isVeg": true,
+            "price": 188
+          },
+          {
+            "name": "Chicken Zinger Burger - Tandoori",
+            "description": "Chicken zinger with a delicious tandoori sauce",
+            "inStock": false,
+            "isVeg": false,
+            "price": 208
+          },
+          {
+            "name": "2 X Chicken Krisper Burgers",
+            "description": "2 delicious chicken value burgers - at a deal price",
+            "inStock": false,
+            "isVeg": false,
+            "price": 248
+          },
+          {
+            "name": "2 X Veg Krisper Burgers",
+            "description": "2 delicious veg value burgers - at a deal price",
+            "inStock": false,
+            "isVeg": true,
+            "price": 179
+          }
+        ]
+      },
+      {
+        "title": "PERI PERI CHICKEN STRIPS & LEG PC (UP TO 25%)",
+        "Dishes": [
+          {
+            "name": "Peri Peri 10 Pc Chicken Strips & 2 Dips",
+            "description": "Save 24% with the indulging 10 Piece Peri Peri Boneless Strips and 2 Dips [Serves 2-3]",
+            "inStock": false,
+            "isVeg": false,
+            "price": 499
+          },
+          {
+            "name": "Peri Peri Chicken 5 Leg Piece & 2 Dips",
+            "description": "Save Rs 120 on 5 Spicy Peri Peri Leg Pieces, paired with 2 delicous dips (20gm each) [serves 2]",
+            "inStock": false,
+            "isVeg": false,
+            "price": 519
+          },
+          {
+            "name": "Peri Peri 10 Leg Pc & 4 Dips",
+            "description": "Save Rs. 334 on 10 Spicy Peri Peri Leg Pieces & 4 Dips (20gm each) [serves 3-4]",
+            "inStock": false,
+            "isVeg": false,
+            "price": 948
+          },
+          {
+            "name": "Peri Peri Chicken Strips - 6 Pc",
+            "description": "Save 16% with on savouring 6 Spicy Peri Peri chicken boneless strips [serves 2]",
+            "inStock": false,
+            "isVeg": false,
+            "price": 299
+          }
+        ]
+      },
+      {
+        "title": "BUCKETS/ MEALS FOR 1-2 (UP TO 15% OFF)",
+        "Dishes": [
+          {
+            "name": "Chicken Krisper Burger Combo",
+            "description": "Save Rs. 57 on Deal combo of 2 chicken value burgers, 2 pc Hot & Crispy, 2 dips (20gm each) & a chilled Pepsi PET 475 ml [Serves 1-2]",
+            "inStock": false,
+            "isVeg": false,
+            "price": 539
+          },
+          {
+            "name": "Chicken Mingles Bucket Meal",
+            "description": "Save Rs. 63 on this crowd favorite combo of 4 Hot Wings, 2 Chicken Peri Peri Boneless Strips, a Reg Popcorn, medium fries & a chilled Pepsi PET 475ml [serves 2 ]",
+            "inStock": false,
+            "isVeg": false,
+            "price": 499
+          },
+          {
+            "name": "Chicken & French Fries Bucket",
+            "description": "Crowd-favorite combo of 2pc Hot & Crispy Chicken with Medium French Fries",
+            "inStock": false,
+            "isVeg": false,
+            "price": 299
+          },
+          {
+            "name": "Chicken Popcorn & French Fries Bucket",
+            "description": "Large Chicken Popcorn with Med French Fries - at a deal price",
+            "inStock": false,
+            "isVeg": false,
+            "price": 319
+          },
+          {
+            "name": "2 X Veg Krispers Burger Meal",
+            "description": "Save Rs. 49 with 2 veg value burgers, crispy Medium French Fries & 2 delicious Dips at a deal price! [Serves 1-2]",
+            "inStock": false,
+            "isVeg": true,
+            "price": 288
+          }
+        ]
+      },
+      {
+        "title": "BUCKETS/ MEALS FOR 3-4 (UP TO 35% OFF)",
+        "Dishes": [
+          {
+            "name": "All in One Chicken Bucket",
+            "description": "Save 24% with variety bucket of 1 Leg Pc, 1 Hot & Crispy, 2 Wings, 2 Strips, 1 Zinger Fillet, 3 Dips [20gm each] & 1 Pepsi 475 ml [Serves 2-3]",
+            "inStock": false,
+            "isVeg": false,
+            "price": 548
+          },
+          {
+            "name": "Ultimate Savings Chicken Bucket",
+            "description": "Savings of 35% on signature bucket of 4pc Hot & crispy chicken, 6 Pc Wings, 4 Chicken Peri Peri Boneless strips, 2 Dips (20 gms each) & a Pepsi PET 475ml [serves 2-3 ]",
+            "inStock": false,
+            "isVeg": false,
+            "price": 699
+          },
+          {
+            "name": "Stay Home Chicken Bucket",
+            "description": "Save 24% & enjoy 4pc Hot & Crispy Chicken, 4 Hot Wings, 6 chicken peri peri boneless strips & 2 delicious dips (20gm each) [serves 3]",
+            "inStock": false,
+            "isVeg": false,
+            "price": 799
+          },
+          {
+            "name": "Big 12 - Chicken Bucket",
+            "description": "Save 26% on 6pc Hot & Crispy Chicken, 6 Hot Wings & 2 dips (20gm each) [serves 2- 3]",
+            "inStock": false,
+            "isVeg": false,
+            "price": 748
+          }
+        ]
+      },
+      {
+        "title": "CHICKEN ROLLS",
+        "Dishes": [
+          {
+            "name": "Double Chicken Roll Meal for 2",
+            "description": "Save Rs. 23 with 2 KFC Double Chicken Roll with servings of 1 Large Fries, 2 delish dips and 1 Pepsi PET 475ml [2 units of Double Chicken Roll, Serves 2]",
+            "inStock": false,
+            "isVeg": false,
+            "price": 548
+          },
+          {
+            "name": "Classic Chicken Roll Meal for 2",
+            "description": "2 units of The classic KFC Chicken Roll with servings of 1 Large Fries, 2 delish dips and 1 Pepsi PET 475ml [2 units of Classic Chicken Roll, Serves 2]",
+            "inStock": false,
+            "isVeg": false,
+            "price": 479
+          },
+          {
+            "name": "Double Chicken Roll Meal for 1",
+            "description": "Save Rs. 24 with a Double Chicken Roll with servings of 1 Large Fries, 2 delish dips and 1 Pepsi PET 475ml [1 unit of Double Chicken Roll, Serves 1]",
+            "inStock": false,
+            "isVeg": false,
+            "price": 379
+          },
+          {
+            "name": "Classic Chicken Roll Meal for 1",
+            "description": "Save Rs. 14 on a classic KFC Chicken Roll with servings of 1 Large Fries, 2 delish dips and 1 Pepsi PET 475ml [1 unit of Classic Chicken Roll, Serves 1]",
+            "inStock": false,
+            "isVeg": false,
+            "price": 339
+          },
+          {
+            "name": "2 Double Chicken Rolls",
+            "description": "2 Double Chicken Roll with double chicken strip filling, layerful parantha onions and two spicy sauce [2 units of Double Chicken Roll, Serves 1-2]",
+            "inStock": false,
+            "isVeg": false,
+            "price": 328
+          },
+          {
+            "name": "2 Classic Chicken Rolls",
+            "description": "Save Rs. 10 on 2 Street Syle Roll with Layerful parantha, single chicken strip, onions and two spicy sauce [2 units of Classic Chicken Roll, Serves 1-2]",
+            "inStock": false,
+            "isVeg": false,
+            "price": 228
+          },
+          {
+            "name": "Double Chicken Roll & Pepsi Combo",
+            "description": "Double fun with double chicken strip filling, layerful parantha onions and two spicy sauce & Pepsi PET 475ml [1 unit of Double Chicken Roll, Serves 1]",
+            "inStock": false,
+            "isVeg": false,
+            "price": 225
+          },
+          {
+            "name": "Classic Chicken Roll & Pepsi Combo",
+            "description": "Street Syle Roll with Layerful parantha, single chicken strip, onions and two spicy sauce & Pepsi PET 475ml [1 units of Classic Chicken Roll, Serves 1]",
+            "inStock": false,
+            "isVeg": false,
+            "price": 176
+          },
+          {
+            "name": "Double Chicken Roll",
+            "description": "Double fun with double chicken strip filling, layerful parantha onions and two spicy sauce [1 unit of Double Chicken Roll, Serves 1]",
+            "inStock": false,
+            "isVeg": false,
+            "price": 168
+          }
+        ]
+      },
+      {
+        "title": "VALUE SNACKERS",
+        "Dishes": [
+          {
+            "name": "Chicken Longer Burger & 2 Strips Combo",
+            "description": "Longgg burger with crunchy chicken, onions & a punchy sauce , served with 2 peri peri chicken strips",
+            "inStock": false,
+            "isVeg": false,
+            "price": 219
+          },
+          {
+            "name": "2 X Veg Longer Burger",
+            "description": "The really long burger with Veg Patty, Onion, Lettuce and two sauces",
+            "inStock": false,
+            "isVeg": true,
+            "price": 198
+          },
+          {
+            "name": "Classic Chicken Roll",
+            "description": "Street style roll with single chicken strip, onions and two spicy sauce [1 unit of Roll]",
+            "inStock": false,
+            "isVeg": false,
+            "price": 119
+          },
+          {
+            "name": "2 X Veg?Roll",
+            "description": "Try the amazing Veg Roll [2 units of Veg Roll]",
+            "inStock": false,
+            "isVeg": true,
+            "price": 228
+          },
+          {
+            "name": "Veg Roll Meal",
+            "description": "Deal meal of 2 Veg Rolls, Large Fries and a Pepsi PET 475ml [Serves 1-2]",
+            "inStock": false,
+            "isVeg": true,
+            "price": 399
+          }
+        ]
+      },
+      {
+        "title": "HOT & CRISPY CHICKEN, WINGS",
+        "Dishes": [
+          {
+            "name": "Hot & Crispy Chicken - 8 pcs",
+            "description": "Save Rs. 182 & get 8pc signature Hot & crispy chicken [serves 3-4]",
+            "inStock": false,
+            "isVeg": false,
+            "price": 768
+          },
+          {
+            "name": "Hot & Crispy Chicken - 6 pcs",
+            "description": "Flat 10% off on 6pc signature Hot & crispy chicken [serves 2-3]",
+            "inStock": false,
+            "isVeg": false,
+            "price": 628
+          },
+          {
+            "name": "Hot & Crispy Chicken - 4 pcs",
+            "description": "Save Rs. 34 on 4 pc of signature Hot & Crispy Chicken at a deal price",
+            "inStock": false,
+            "isVeg": false,
+            "price": 428
+          },
+          {
+            "name": "Hot & Crispy Chicken- 2 pcs",
+            "description": "Signature Hot & crispy chicken",
+            "inStock": false,
+            "isVeg": false,
+            "price": 229
+          },
+          {
+            "name": "Hot Chicken Wings - 4 pcs",
+            "description": "Seasoned, signature KFC chicken wings",
+            "inStock": false,
+            "isVeg": false,
+            "price": 179
+          },
+          {
+            "name": "Hot & Crispy Chicken - 1 pc",
+            "description": "Signature Hot & crispy chicken",
+            "inStock": false,
+            "isVeg": false,
+            "price": 115
+          }
+        ]
+      },
+      {
+        "title": "BONELESS CHICKEN POPCORN",
+        "Dishes": [
+          {
+            "name": "Chicken Popcorn - Large",
+            "description": "Signature bite-sized boneless chicken, with special spices",
+            "inStock": false,
+            "isVeg": false,
+            "price": 248
+          },
+          {
+            "name": "Chicken Popcorn - Medium",
+            "description": "Signature bite-sized boneless chicken, with special spices",
+            "inStock": false,
+            "isVeg": false,
+            "price": 168
+          },
+          {
+            "name": "Chicken Popcorn - Regular",
+            "description": "Signature bite-sized boneless chicken, with special spices",
+            "inStock": false,
+            "isVeg": false,
+            "price": 115
+          }
+        ]
+      },
+      {
+        "title": "SIDES AND DIPS",
+        "Dishes": [
+          {
+            "name": "Chicken Leg Piece - 1 pc",
+            "description": "Crispy Chicken Leg Piece",
+            "inStock": false,
+            "isVeg": false,
+            "price": 125
+          },
+          {
+            "name": "Peri Peri Chicken Strips - 3 pc",
+            "description": "3 Pieces Spicy Peri Peri chicken boneless strips",
+            "inStock": false,
+            "isVeg": false,
+            "price": 179
+          },
+          {
+            "name": "2 pc Veg Patty",
+            "description": "Delicious, crispy, veg add-on",
+            "inStock": false,
+            "isVeg": true,
+            "price": 155
+          },
+          {
+            "name": "French Fries - Large",
+            "description": "Jazz up your meal with crispy french fries",
+            "inStock": false,
+            "isVeg": true,
+            "price": 119
+          },
+          {
+            "name": "French Fries - Medium",
+            "description": "Jazz up your meal with crispy french fries",
+            "inStock": false,
+            "isVeg": true,
+            "price": 99
+          },
+          {
+            "name": "Pack of 4 Dips",
+            "description": "Adding dips is always a good idea! (Save Rs. 5)",
+            "inStock": false,
+            "isVeg": true,
+            "price": 109
+          },
+          {
+            "name": "Pack of 2 Dips",
+            "description": "Adding dips is always a good idea!",
+            "inStock": false,
+            "isVeg": true,
+            "price": 57
+          },
+          {
+            "name": "Tandoori Masala Dip",
+            "description": "Special tandoori flavor dip to add a twist to your meal",
+            "inStock": false,
+            "isVeg": true,
+            "price": 28
+          },
+          {
+            "name": "Nashville Hot Pepper Sauce Bottle",
+            "description": "Nashville in a bottle! Our signature hot, peppery sauce which pairs well with all things KFC.",
+            "inStock": false,
+            "isVeg": true,
+            "price": 189
+          },
+          {
+            "name": "Dynamite Spicy Mayo Sauce Bottle",
+            "description": "Spicy, punchy mayo?bottled up just for you & your favorite KFC! Our signature launch.",
+            "inStock": false,
+            "isVeg": true,
+            "price": 189
+          }
+        ]
+      },
+      {
+        "title": "DESSERTS & BEVERAGES",
+        "Dishes": [
+          {
+            "name": "Chocolate Lava Cake",
+            "description": "New Soft Chocolate cake with a gooey center- perfect chocolaty end to every meal",
+            "inStock": false,
+            "isVeg": true,
+            "price": 108
+          },
+          {
+            "name": "Chocolate Mud Pie",
+            "description": "Chocolate lovers unite! Say hello to our delicious, new, creamy chocolate & cake dessert- a must try!",
+            "inStock": false,
+            "isVeg": true,
+            "price": 128
+          },
+          {
+            "name": "Coffee Mousse Cake",
+            "description": "Coffee, chocolate, cake?what's not to love? Enjoy our delicious, new dessert for those coffee-licious temptations!",
+            "inStock": false,
+            "isVeg": true,
+            "price": 128
+          },
+          {
+            "name": "Pepsi PET 475ml",
+            "description": "Cheers to fizz that makes you Rise Up Baby! Order Pepsi to make your food rise up to your level of awesome!",
+            "inStock": false,
+            "isVeg": true,
+            "price": 57
+          },
+          {
+            "name": "Pepsi Can 300 ml",
+            "description": "Cheers to fizz that makes you Rise Up Baby! Order Pepsi to make your food rise up to your level of awesome!",
+            "inStock": false,
+            "isVeg": true,
+            "price": 57
+          },
+          {
+            "name": "7UP Can 300 ml",
+            "description": "7UP is the ultimate Super-Duper Refresher. Every sip of this crisp lemon flavour refreshes you to the core.",
+            "inStock": false,
+            "isVeg": true,
+            "price": 57
+          },
+          {
+            "name": "Pepsi Black Can 300 ml",
+            "description": "Enjoy Pepsi Black to make your food rise up to max levels of awesome with Zero sugar and Zero guilt!",
+            "inStock": false,
+            "isVeg": true,
+            "price": 57
+          },
+          {
+            "name": "Mirinda Can 300 ml",
+            "description": "Great orange taste and sparking bubbles encourage you to be carefree, spontaneous and playful!",
+            "inStock": false,
+            "isVeg": true,
+            "price": 57
+          }
+        ]
+      }
+    ],
+    "URL": "https://www.swiggy.com/restaurants/kfc-double-road-shanti-nagar-bangalore-432976"
+  }
+}
