@@ -1,12 +1,11 @@
 const mongoose = require('mongoose');
 
-// Define the schema for the restaurant document
 const restaurantSchema = new mongoose.Schema({
     name: String,
-    cuisine:String,
-    zomatoOffers: [],
-    swiggyOffers: [],
-    magicPinOffers: [],
+    cuisine: String,
+    zomatoOffers: [], // Explicitly define as an array of strings
+    swiggyOffers: [], // Explicitly define as an array of strings
+    magicPinOffers: [], // Explicitly define as an array of strings
     menu: [
         {
             name: String,
@@ -19,6 +18,4 @@ const restaurantSchema = new mongoose.Schema({
     ]
 });
 
-
-// Create the Mongoose model based on the schema
 module.exports = mongoose.model('Restaurant', restaurantSchema);
