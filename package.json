@@ -12,6 +12,7 @@
     "axios": "^1.6.7",
     "cheerio": "^1.0.0-rc.12",
     "dotenv": "^16.4.1",
+    "fuzzball": "^2.1.2",
     "moment-timezone": "^0.5.45",
     "mongodb": "^6.3.0",
     "mongoose": "^8.1.1",

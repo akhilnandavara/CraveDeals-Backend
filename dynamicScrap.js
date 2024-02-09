@@ -1,3 +1,5 @@
+
+//This script is used to scrape data from Swiggy and Zomato through automatic scraping top resturants in bangalore and store the data in MongoDB.
 const puppeteer = require('puppeteer');
 const cheerio = require('cheerio');
 require('dotenv').config();
@@ -168,20 +170,20 @@ async function fetchDataFromSwiggy() {
         let showMoreClicks = 0;
 
         // Click "Show More" until there are no more to load or until we have 20 URLs
-        // while (await isShowMoreVisible(page) && restaurantURLs.length < 40) {
-        //     await clickShowMore(page);
-        //     showMoreClicks++;
+        while (await isShowMoreVisible(page) && restaurantURLs.length < 40) {
+            await clickShowMore(page);
+            showMoreClicks++;
 
-        //     const additionalURLs = await extractRestaurantURLs(page);
-        //     restaurantURLs = restaurantURLs.concat(additionalURLs);
-        // }
+            const additionalURLs = await extractRestaurantURLs(page);
+            restaurantURLs = restaurantURLs.concat(additionalURLs);
+        }
 
 
         // Close the browser as we've gathered the URLs
         await browser.close()
 
         // Limit to 20 restaurants for testing purposes
-        // restaurantURLs = restaurantURLs.slice(0, 40);
+        restaurantURLs = restaurantURLs.slice(0, 20);
 
         const restaurantData = [];
         for (const url of restaurantURLs) {
@@ -287,8 +289,6 @@ async function scrapeSwiggyRestaurantData(url) {
         return { error: 'Error scraping Swiggy restaurant data' };
     }
 }
-
-
 
 
 
