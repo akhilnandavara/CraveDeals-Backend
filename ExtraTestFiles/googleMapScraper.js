@@ -2,7 +2,7 @@
 //this script is used to scrape the data from google maps for the predefined restaurant names
 const cheerio = require('cheerio'); // For HTML parsing
 const puppeteer = require('puppeteer'); // For browser automation
-const { RestaurantNames } = require('./dataSets/restrurantNames'); // Importing restaurant names dataset
+const { RestaurantNames } = require('../dataSets/restrurantNames'); // Importing restaurant names dataset
 const fuzzball = require('fuzzball'); // For fuzzy string matching
 
 // Entry point of the script

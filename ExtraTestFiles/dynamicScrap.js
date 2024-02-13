@@ -10,7 +10,7 @@ const zomatoUrl = 'https://www.zomato.com/bangalore/delivery-in-bannerghatta-roa
 const url = process.env.MONGODB_URL;
 const dbName = 'restaurant_Data';
 const collectionName = 'restaurant';
-const mongoDBHelper=require('./mongoDBHelper');
+const mongoDBHelper=require('../mongoDBHelper');
 
 (async () => {
     
