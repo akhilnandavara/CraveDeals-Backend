@@ -9,8 +9,8 @@ exports.getRestaurantList=async(req,res)=> {
 }
 
 exports.getRestaurantData=async(req,res)=> {
-    const id=req.body;
-    const restaurantData=await Restaurant.find({_id:id}).exec();
+    const {restrurantId}=req.body;
+    const restaurantData=await Restaurant.find({_id:restrurantId}).exec();
     return res.json({
         success:true,
         data:restaurantData

@@ -4,11 +4,11 @@ const restaurantSchema = new mongoose.Schema({
     name: String,
     cuisine: [],
     images:[],
-    googleData: [{
+    googleData: {
         name: String,
         ratings: [],
         reviews: [],
-    }],
+    },
     zomatoOffers: [], 
     swiggyOffers: [], 
     magicPinOffers: [],
@@ -21,7 +21,11 @@ const restaurantSchema = new mongoose.Schema({
             zomatoPrice: String,
             magicPinPrice: String
         }
-    ]
+    ],
+    updatedAt:
+    {    type: Date,
+        default: Date.now(),
+        }
 });
 
 module.exports = mongoose.model('Restaurant', restaurantSchema);

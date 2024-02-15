@@ -52,7 +52,7 @@ async function fetchCommonRestaurants(restaurantNames) {
                 // Scrape swiggy data from each URL
                 let swiggyData = await scrapeSwiggyRestaurantData(page, swiggyURL, ua);
                 while (swiggyData.menu.length === 0 && retryCount < maxRetries) {
-                    console.log(`Retrying fetching Zomato data for ${restaurantName}, attempt ${retryCount + 1}`);
+                    console.log(`Retrying fetching Swiggy data for ${restaurantName}, attempt ${retryCount + 1}`);
                     swiggyData = await scrapeSwiggyRestaurantData(page, swiggyURL, ua);
                     retryCount++;
                 }
@@ -72,10 +72,10 @@ async function fetchCommonRestaurants(restaurantNames) {
 
                 if (magicPinURL) {
                     // Fetch data from MagicPin
-                    const magicPinData = await scrapMenuItemsFromMagicpin(magicPinURL, browser, ua);
+                    let magicPinData = await scrapMenuItemsFromMagicpin(magicPinURL, browser, ua);
                     // console.log(magicPinData)
                     while (magicPinData.menu.length === 0 && retryCount < maxRetries) {
-                        console.log(`Retrying fetching Zomato data for ${restaurantName}, attempt ${retryCount + 1}`);
+                        console.log(`Retrying fetching MagicPin data for ${restaurantName}, attempt ${retryCount + 1}`);
                         magicPinData = await scrapMenuItemsFromMagicpin(magicPinURL, browser, ua);
                         retryCount++;
                     }
@@ -118,7 +118,7 @@ async function fetchCommonRestaurants(restaurantNames) {
                         restaurantName: restaurantName,
                         cuisine: swiggyData.cuisine,
                         images: zomatoData.imageUrls,
-                        googleData: [googleData],
+                        googleData: googleData,
                         swiggyOffers: swiggyData.offers,
                         zomatoOffers: zomatoData.offers,
                         magicPinOffers: magicPinData.offers,
@@ -148,7 +148,10 @@ async function fetchCommonRestaurants(restaurantNames) {
 
 async function storeOrUpdateRestaurants(commonRestaurants) {
     try {
+       
         for (const restaurantData of commonRestaurants) {
+            // Check if the restaurant already exists in the database
+
             let existingRestaurant = await Restaurant.findOne({ name: restaurantData.restaurantName });
 
             if (!existingRestaurant) {
@@ -165,18 +168,22 @@ async function storeOrUpdateRestaurants(commonRestaurants) {
                 await newRestaurant.save();
                 console.log(`New restaurant added: ${restaurantData.restaurantName}`);
             } else {
+                if (existingRestaurant.updatedAt.toDateString() === new Date().toDateString()) {
+                    console.log(`Restaurant data for ${restaurantData.name} is already up to date.`);
+                } else {
                 existingRestaurant.cuisine = restaurantData.cuisine;
                 existingRestaurant.googleData = restaurantData.googleData;
                 existingRestaurant.swiggyOffers = restaurantData.swiggyOffers;
                 existingRestaurant.images = restaurantData.images;
                 existingRestaurant.zomatoOffers = restaurantData.zomatoOffers;
                 existingRestaurant.magicPinOffers = restaurantData.magicPinOffers;
-                // Update menu only if latest menu array is not empty
+                // Update menu only if the latest menu array is not empty
                 if (restaurantData.menu.length > 0) {
                     existingRestaurant.menu = restaurantData.menu;
                 }
                 await existingRestaurant.save();
                 console.log(`Restaurant data updated for: ${restaurantData.restaurantName}`);
+            }
             }
         }
     } catch (error) {
@@ -408,7 +415,7 @@ async function scrapMenuItemsFromMagicpin(url, browser, ua) {
         await page.setUserAgent(ua);
         // Navigate to the provided URL
         await page.goto(url, { waitUntil: 'domcontentloaded' }); // Wait for DOM content to be loaded
-        await new Promise(resolve => setTimeout(resolve, 5000));
+        await new Promise(resolve => setTimeout(resolve, 10000));
 
         // Get the HTML content of the page
         const htmlContent = await page.content();

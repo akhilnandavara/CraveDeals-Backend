@@ -8,6 +8,6 @@ const {getRestaurantList,getRestaurantData}=require('../controllers/Restaurant')
 // 1. Add a new route for fetching restaurant data
 // ************************************************
 router.get('/getRestaurantList',getRestaurantList)
-router.get('/getRestaurantData',getRestaurantData)
+router.post('/getRestaurantData',getRestaurantData)
 
 module.exports=router;
