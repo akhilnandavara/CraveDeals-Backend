@@ -20,18 +20,8 @@ app.use(cors({
     credentials:true,
 }))
 
-
-// Schedule the task to run at 8 AM Indian time
-cron.schedule('58 18 * * *', async () => {
-    console.log(`Running scheduled task at ${moment.tz('Asia/Kolkata').format()}`);
-    await fetchRestaurantUpdatedData()
-}, {
-    scheduled: true,
-    timezone: "Asia/Kolkata"
-})
-
 // connect to db
-dbConnect();
+dbConnect()
 
 // routes
 app.use("/api/v1/cuisine",cuisineRoute)
@@ -44,6 +34,15 @@ app.use('/',(req,res)=>{
         message:"Server is up and running"
     })
 })
+
+// // Schedule the task to run at 8 AM Indian time
+// cron.schedule('0 8 * * *', async () => {
+//     console.log(`Running scheduled task at ${moment.tz('Asia/Kolkata').format()}`);
+//     await fetchRestaurantUpdatedData()
+// }, {
+//     scheduled: true,
+//     timezone: "Asia/Kolkata"
+// })
 
 // server  listen 
 app.listen(PORT,()=>{

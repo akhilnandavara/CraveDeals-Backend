@@ -3,6 +3,6 @@ const router=express.Router()
 
 const {fetchCuisineData}=require('../controllers/Cuisine')
 
-router.get('/fetchCuisineData',fetchCuisineData)
+router.post('/getCuisineData',fetchCuisineData)
 
 module.exports = router;

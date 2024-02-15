@@ -16,6 +16,13 @@ exports.dbConnect = () => {
     });
 };
 
-exports.dbClose=()=>{
-  mongoose.connection.close()
-}
+
+
+exports.dbClose = async () => {
+  try {
+    await mongoose.connection.close();
+    console.log("DB Connection Closed Successfully");
+  } catch (error) {
+    console.error("Error closing DB connection:", error);
+  }
+};
