@@ -532,7 +532,7 @@ async function scrapeGoogleRestaurantData(page, url, ua) {
             const name = $(element).find('div.d4r55').text().trim();
             const intro = $(element).find('div.RfnDt').text().trim();
             const star = $(element).find('div.kvMYJc').attr('aria-label');
-            const postedTime = $(element).find('div.rsqaWe').text().trim();
+            const postedTime = $(element).find('span.rsqaWe').text().trim();
             const reviewDesc = $(element).find('span.wiI7pd').text().trim();
             restaurantData.reviews.push({ profileImg: profileImg, name: name, intro: intro, star: star, postedTime: postedTime, reviewDesc: reviewDesc });
         });
