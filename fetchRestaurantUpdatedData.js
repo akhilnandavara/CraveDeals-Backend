@@ -2,7 +2,6 @@
 const cheerio = require('cheerio');
 const puppeteer = require('puppeteer');
 require('dotenv').config();
-const { dbConnect, dbClose } = require('./mongoDBHelper');
 const { magicpinUrls } = require('./dataSets/magicPinUrl');
 const { RestaurantNames } = require('./dataSets/restaurantNames');
 const Restaurant = require('./modals/Restaurant');
@@ -21,13 +20,12 @@ exports.fetchRestaurantUpdatedData = async () => {
 // Function to fetch data for common restaurant
 async function fetchCommonRestaurants(restaurantNames) {
     const commonRestaurants = [];
-
     try {
         // User agent string for browser
         const ua = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36';
 
         // Launch Puppeteer browser instance
-        const browser = await puppeteer.launch({ headless: true, defaultViewport: null });
+        const browser = await puppeteer.launch({ headless: false, defaultViewport: null });
         const page = await browser.newPage();
 
         // Iterate over restaurant names
@@ -35,110 +33,120 @@ async function fetchCommonRestaurants(restaurantNames) {
             let retryCount = 0;
             const maxRetries = 4;
             try {
-                // Fetch URLs for Swiggy, Zomato
-                const swiggyURL = await getSwiggyURL(page, restaurantName, ua);
-                const zomatoURL = await getZomatoURL(page, restaurantName, ua);
-                const googleURL = await getGoogleURL(page, restaurantName, ua);
+                let swiggyURL = '';
+                let zomatoURL = '';
+                let googleURL = '';
 
-                // Scrape swiggy data from each URL
-                let swiggyData = await scrapeSwiggyRestaurantData(page, swiggyURL, ua);
-                while (swiggyData.menu.length === 0 && retryCount < maxRetries) {
-                    console.log(`Retrying fetching Swiggy data for ${restaurantName}, attempt ${retryCount + 1}`);
-                    swiggyData = await scrapeSwiggyRestaurantData(page, swiggyURL, ua);
+                while (!swiggyURL && retryCount < maxRetries) {
+                    swiggyURL = await getSwiggyURL(page, restaurantName, ua);
                     retryCount++;
                 }
                 retryCount = 0;
 
-                let zomatoData = await scrapeZomatoRestaurantData(page, zomatoURL, ua);
-                //scrapping zomato data
-                while (zomatoData.menu.length === 0 && retryCount < maxRetries) {
-                    console.log(`Retrying fetching Zomato data for ${restaurantName}, attempt ${retryCount + 1}`);
-                    zomatoData = await scrapeZomatoRestaurantData(page, zomatoURL, ua);
+                while (!zomatoURL && retryCount < maxRetries) {
+                    zomatoURL = await getZomatoURL(page, restaurantName, ua);
                     retryCount++;
                 }
                 retryCount = 0;
 
-                //scrape google data
-                let googleData = await scrapeGoogleRestaurantData(page, googleURL, ua);
-                while (googleData.reviews.length === 0 && retryCount < maxRetries) {
-                    console.log(`Retrying fetching Google data for ${restaurantName}, attempt ${retryCount + 1}`);
-                    googleData = await scrapeGoogleRestaurantData(page, googleURL, ua);
+                while (!googleURL && retryCount < maxRetries) {
+                    googleURL = await getGoogleURL(page, restaurantName, ua);
                     retryCount++;
                 }
                 retryCount = 0;
 
-
-                // Find the MagicPin URL for the current restaurant
-                const magicPinURL = magicpinUrls.find(url => url.includes(restaurantName.replace(/\s/g, '-').trim()));
-
-                if (magicPinURL) {
-                    // Fetch data from MagicPin
-                    let magicPinData = await scrapMenuItemsFromMagicpin(magicPinURL, browser, ua);
-                    // console.log(magicPinData)
-                    while (magicPinData.menu.length === 0 && retryCount < maxRetries) {
-                        console.log(`Retrying fetching MagicPin data for ${restaurantName}, attempt ${retryCount + 1}`);
-                        magicPinData = await scrapMenuItemsFromMagicpin(magicPinURL, browser, ua);
+                if (swiggyURL && zomatoURL && googleURL) {
+                    // Fetch data from Swiggy
+                    let swiggyData = await scrapeSwiggyRestaurantData(page, swiggyURL, ua);
+                    while (swiggyData.menu.length === 0 && retryCount < maxRetries) {
+                        swiggyData = await scrapeSwiggyRestaurantData(page, swiggyURL, ua);
                         retryCount++;
                     }
-
                     retryCount = 0;
-                    // Combined menu array to hold menu items with prices from different sources
-                    // Define the final combined menu array
-                    const combinedMenu = [];
 
-                    // Iterate through each section heading in the swiggyData.menu
-                    for (const sectionHeading in swiggyData.menu) {
-                        if (Object.hasOwnProperty.call(swiggyData.menu, sectionHeading)) {
-                            const menuItemsInSection = swiggyData.menu[sectionHeading];
-
-                            // Iterate through each menu item in the current section
-                            const combinedMenuItemsInSection = menuItemsInSection.map(swiggyItem => {
-                                // Find the corresponding item in Zomato data
-                                const zomatoItem = zomatoData.menu?.find(item => item.name.toLowerCase() === swiggyItem.name.toLowerCase());
-
-                                // Find the corresponding item in MagicPin data
-                                const magicPinItem = magicPinData.menu?.find(item => item.name.toLowerCase() === swiggyItem.name.toLowerCase());
-
-                                // Create a combined menu item object
-                                const combinedMenuItem = {
-                                    name: swiggyItem.name,
-                                    description: swiggyItem.description,
-                                    image: swiggyItem.image,
-                                    swiggyPrice: swiggyItem.price,
-                                    zomatoPrice: zomatoItem ? zomatoItem.price : 'Not available',
-                                    magicPinPrice: magicPinItem ? magicPinItem.price : 'Not available'
-                                };
-
-                                return combinedMenuItem;
-                            });
-
-                            // Add the combined menu items of the current section to the final combined menu array
-                            combinedMenu.push({ sectionHeading, menuItems: combinedMenuItemsInSection });
-
-                        }
+                    // Fetch data from Zomato
+                    let zomatoData = await scrapeZomatoRestaurantData(page, zomatoURL, ua);
+                    while (zomatoData.menu.length === 0 && retryCount < maxRetries) {
+                        zomatoData = await scrapeZomatoRestaurantData(page, zomatoURL, ua);
+                        retryCount++;
                     }
+                    retryCount = 0;
 
+                    // Fetch data from Google
+                    let googleData = await scrapeGoogleRestaurantData(page, googleURL, ua);
+                    while (googleData.reviews.length === 0 && retryCount < maxRetries) {
+                        googleData = await scrapeGoogleRestaurantData(page, googleURL, ua);
+                        retryCount++;
+                    }
+                    retryCount = 0;
 
-                    // Push collected data into commonRestaurants array
-                    commonRestaurants.push({
-                        restaurantName: restaurantName,
-                        cuisine: swiggyData.cuisine,
-                        images: zomatoData.imageUrls,
-                        googleData: googleData,
-                        swiggyOffers: swiggyData.offers,
-                        zomatoOffers: zomatoData.offers,
-                        magicPinOffers: magicPinData.offers,
-                        menu: combinedMenu // Assuming combinedMenu is an array containing menu items with prices from all sources
-                    });
+                    // Find the MagicPin URL for the current restaurant
+                    const magicPinURL = magicpinUrls.find(url => url.toLowerCase().includes(restaurantName.replace(/\s/g, '-').trim().toLowerCase()));
 
+                    if (magicPinURL) {
+                        // Fetch data from MagicPin
+                        let magicPinData = await scrapMenuItemsFromMagicpin(magicPinURL, browser, ua);
+                        while (magicPinData.menu.length === 0 && retryCount < maxRetries) {
+                            magicPinData = await scrapMenuItemsFromMagicpin(magicPinURL, browser, ua);
+                            retryCount++;
+                        }
+                        retryCount = 0;
 
-                    // console.log("commonRestaurants", commonRestaurants)
-                    // Store or update restaurant data in MongoDB
-                    await storeOrUpdateRestaurants(commonRestaurants);
+                        // Combined menu array to hold menu items with prices from different sources
+                        // Define the final combined menu array
+                        const combinedMenu = [];
+
+                        // Iterate through each section heading in the swiggyData.menu
+                        for (const sectionHeading in swiggyData.menu) {
+                            if (Object.hasOwnProperty.call(swiggyData.menu, sectionHeading)) {
+                                const menuItemsInSection = swiggyData.menu[sectionHeading];
+
+                                // Iterate through each menu item in the current section
+                                const combinedMenuItemsInSection = menuItemsInSection.map(swiggyItem => {
+                                    // Find the corresponding item in Zomato data
+                                    const zomatoItem = zomatoData.menu?.find(item => item.name.toLowerCase() === swiggyItem.name.toLowerCase());
+
+                                    // Find the corresponding item in MagicPin data
+                                    const magicPinItem = magicPinData.menu?.find(item => item.name.toLowerCase() === swiggyItem.name.toLowerCase());
+
+                                    // Create a combined menu item object
+                                    const combinedMenuItem = {
+                                        name: swiggyItem.name,
+                                        description: swiggyItem.description,
+                                        image: swiggyItem.image,
+                                        swiggyPrice: swiggyItem.price,
+                                        zomatoPrice: zomatoItem ? zomatoItem.price : 'Not available',
+                                        magicPinPrice: magicPinItem ? magicPinItem.price : 'Not available'
+                                    };
+
+                                    return combinedMenuItem;
+                                });
+
+                                // Add the combined menu items of the current section to the final combined menu array
+                                combinedMenu.push({ sectionHeading, menuItems: combinedMenuItemsInSection });
+                            }
+                        }
+
+                        // Push collected data into commonRestaurants array
+                        commonRestaurants.push({
+                            restaurantName: restaurantName,
+                            cuisine: swiggyData.cuisine,
+                            images: zomatoData.imageUrls,
+                            googleData: googleData,
+                            swiggyOffers: swiggyData.offers,
+                            zomatoOffers: zomatoData.offers,
+                            magicPinOffers: magicPinData.offers,
+                            menu: combinedMenu // Assuming combinedMenu is an array containing menu items with prices from all sources
+                        });
+
+                        // Store or update restaurant data in MongoDB
+                        await storeOrUpdateRestaurants(commonRestaurants);
+                    } else {
+                        console.error(`MagicPin URL not found for ${restaurantName}`);
+                    }
                 } else {
-                    console.error(`MagicPin URL not found for ${restaurantName}`);
+                    console.error(`URLs not found for ${restaurantName}`);
                 }
-
             } catch (error) {
                 console.error(`Error processing ${restaurantName}:`, error);
             }
@@ -150,8 +158,8 @@ async function fetchCommonRestaurants(restaurantNames) {
         console.error('Error fetching common restaurants:', error);
         return null;
     }
-
 }
+
 
 async function storeOrUpdateRestaurants(commonRestaurants) {
     try {
@@ -185,7 +193,7 @@ async function storeOrUpdateRestaurants(commonRestaurants) {
                 console.log(`New restaurant added: ${restaurantData.restaurantName}`);
             } else {
                 if (existingRestaurant.updatedAt.toDateString() === new Date().toDateString()) {
-                    console.log(`Restaurant data for ${restaurantData.name} is already up to date.`);
+                    console.log(`Restaurant data for ${restaurantData.restaurantName} is already up to date.`);
                 } else {
                     existingRestaurant.cuisine = restaurantData.cuisine;
                     existingRestaurant.googleData = restaurantData.googleData;
@@ -422,10 +430,8 @@ async function scrapeZomatoRestaurantData(page, url, ua) {
         $('img.sc-s1isp7-5.eQUAyn').each((index, element) => {
             // Find image elements and extract src attribute
             const imageUrl = $(element).attr('src');
-            if (imageUrl) {
                 // Push the extracted image URL to the array
                 restaurantData.imageUrls.push(imageUrl);
-            }
         });
 
         // Extract menu items
@@ -498,6 +504,7 @@ async function scrapMenuItemsFromMagicpin(url, browser, ua) {
     }
 }
 
+// Function to scrape restaurant data from Google
 async function scrapeGoogleRestaurantData(page, url, ua) {
     try {
         page.setUserAgent(ua);
@@ -507,44 +514,135 @@ async function scrapeGoogleRestaurantData(page, url, ua) {
         const htmlContent = await page.content();
         const $ = cheerio.load(htmlContent);
 
+
+        // Define a regular expression pattern to match latitude and longitude values in the Google Maps URL
+        const match = url.match(/!3d(-?\d+\.\d+)!4d(-?\d+\.\d+)/);
+
         // Extract restaurant data
         const restaurantData = {
             name: $('h1.DUwDvf.lfPIob').text().trim(),
+            cuisine: '',
+            formattedOpeningHours: [],
+            address: '',
+            url: $('div.rogA2c.ITvuef').text().trim(),
+            phone: '',
             ratings: [],
             reviews: [],
-        }
+            latitude: match && match.length >= 3 ? match[1] : null,
+            longitude: match && match.length >= 3 ? match[2] : null,
+            restoOptions: [], // to store the restaurant options like delivery, takeout, dine-in
+        };
 
-        // Extract ratings
+        // Extract ratings and number of reviews
         const rating = $('.F7nice > span > span[aria-hidden="true"]').text().trim();
-
-        // Extract the number of reviews
         const reviewsText = $('.F7nice > span > span > span[aria-label]').text().trim();
-
-        // Extract the number of reviews from the reviewsText
         const reviewsCount = reviewsText.replace(/[^\d]/g, '');
         const formattedReviews = Number(reviewsCount).toLocaleString();
-        restaurantData.ratings.push({ rating: rating, review: formattedReviews });
+        restaurantData.ratings.push({ rating: rating, reviews: formattedReviews });
 
+        // Selecting the first child element of div.rogA2c matching div.Io6YTe.fontBodyMedium.kR99db
+        const firstChild = $('div.rogA2c > div.Io6YTe.fontBodyMedium.kR99db:first-child');
 
-        // Extract Reviews
+        // If the first child element is found, extract its text content
+        if (firstChild.length > 0) {
+            const restoInfo = firstChild.text().trim();
+            restaurantData.address = restoInfo;
+        }
+        // Extract phone number 
+        // Find the button element with the unique attribute 'data-item-id'
+        const phoneNumberButton = $('button[data-item-id^="phone:tel"]');
+
+        if (phoneNumberButton.length > 0) { // Check if the phone number button element exists
+            // Extract the value of the 'data-item-id' attribute
+            const phoneNumberDataItemId = phoneNumberButton.attr('data-item-id');
+
+            if (phoneNumberDataItemId) { // Check if the data-item-id attribute exists
+                // Split the 'data-item-id' value to get the phone number
+                const phoneNumberParts = phoneNumberDataItemId.split(':');
+
+                if (phoneNumberParts.length === 3) { // Check if the phone number parts are correctly split
+                    // Assign the matched phone number to restaurantData.phoneNumber
+                    restaurantData.phone = phoneNumberParts[2];
+                } else {
+                    console.error('Phone number format is invalid:', phoneNumberDataItemId);
+                }
+            } else {
+                console.error('Phone number data-item-id attribute not found.');
+            }
+        } else {
+            console.error('Phone number button element not found.');
+        }
+
+        const cuisine = $('button[class="DkEaL "]');
+        restaurantData.cuisine = cuisine.text().trim();
+
+        // Extract reviews
         $('.jftiEf.fontBodyMedium').each((index, element) => {
             const profileImg = $(element).find('img.NBa7we').attr('src');
             const name = $(element).find('div.d4r55').text().trim();
             const intro = $(element).find('div.RfnDt').text().trim();
-            const star = $(element).find('div.kvMYJc').attr('aria-label');
+            const star = $(element).find('span.kvMYJc').attr('aria-label');
             const postedTime = $(element).find('span.rsqaWe').text().trim();
             const reviewDesc = $(element).find('span.wiI7pd').text().trim();
             restaurantData.reviews.push({ profileImg: profileImg, name: name, intro: intro, star: star, postedTime: postedTime, reviewDesc: reviewDesc });
         });
+        // Extract restaurant options
+        $('div.LTs0Rc').each((index, element) => {
+            const optionText = $(element).text().trim();
+            const extracted = optionText.match(/·\s*(.*)/); // Use regex to match the dot and everything following it
+            const option = extracted ? extracted[1].trim() : ""; // If a match is found, use the matched text, else use the entire text
+            restaurantData.restoOptions.push(option);
+        });
 
-        return restaurantData;
+        //extract Restaurant timing
+        try {
+            const openingHours = $('div.t39EBf.GUrTXd').attr('aria-label').trim();
+            console.log("openingHours", openingHours);
+
+            if (!openingHours) {
+                throw new Error('No opening hours found.');
+            }
+
+            const dayTimePairs = openingHours.split(';')?.map(pair => pair.trim());
+
+            const formattedOpeningHours = [];
+
+            // Iterate over each day-time pair
+            dayTimePairs?.forEach(pair => {
+                // Split each pair into day and timing
+                const [day, timing] = pair.split(',');
+
+                if (day && timing) { // Check if both day and timing exist
+                    // Format the timing string
+                    const formattedTiming = timing.replace('am', 'am').replace('pm', 'pm');
+
+                    // Construct the formatted opening hour string
+                    let formattedPair = `${day.trim()}: ${formattedTiming}`;
+
+                    // Check if it's Sunday and remove the unwanted text
+                    if (day.trim() === 'Sunday') {
+                        formattedPair = formattedPair.replace('Hide open hours for the week', '').trim();
+                    }
+
+                    // Push the formatted pair to the array
+                    formattedOpeningHours.push(formattedPair);
+                } else {
+                    console.log(`Missing timing for ${day}.`);
+                }
+            });
+
+            restaurantData.formattedOpeningHours = formattedOpeningHours;
+        } catch (error) {
+            console.error('Error processing opening hours:', error.message);
+        }
+
+
+        return restaurantData; // Return the extracted restaurant data
     } catch (error) {
-        console.error('Error scraping Swiggy restaurant data:', error);
-        return { error: 'Error scraping Swiggy restaurant data' };
+        console.error('Error scraping Google restaurant data:', error);
+        return { error: 'Error scraping Google restaurant data' };
     }
-
 }
-
 
 
 // Function to introduce delay

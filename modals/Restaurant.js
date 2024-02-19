@@ -21,8 +21,16 @@ const restaurantSchema = new mongoose.Schema({
     images: [String], // Assuming storing URLs to images
     googleData: {
         name: String,
+        cuisine:String,
+        formattedOpeningHours:[],
+        address:String,
+        url:String,
+        phone:String,
+        latitude:String,
+        longitude:String,
         ratings: [], // Assuming storing ratings as numbers
-        reviews: []
+        reviews: [],
+        restoOptions:[],
     },
     zomatoOffers: [{
         discount: String,
@@ -40,6 +48,11 @@ const restaurantSchema = new mongoose.Schema({
     }
 });
 
+// Update the 'updatedAt' field before saving the document
+restaurantSchema.pre('save', function(next) {
+    this.updatedAt = new Date(); // Update 'updatedAt' to the current date and time
+    next(); // Proceed to save the document
+});
 module.exports = mongoose.model('Restaurant', restaurantSchema);
 
 
