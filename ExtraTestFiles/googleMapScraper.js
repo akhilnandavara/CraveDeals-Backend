@@ -131,6 +131,7 @@ async function scrapeGoogleRestaurantData(page, url, ua) {
             restoOptions: [], // to store the restaurant options like delivery, takeout, dine-in
         };
 
+
         // Extract ratings and number of reviews
         const rating = $('.F7nice > span > span[aria-hidden="true"]').text().trim();
         const reviewsText = $('.F7nice > span > span > span[aria-label]').text().trim();
@@ -139,7 +140,8 @@ async function scrapeGoogleRestaurantData(page, url, ua) {
         restaurantData.ratings.push({ rating: rating, reviews: formattedReviews });
 
         // Selecting the first child element of div.rogA2c matching div.Io6YTe.fontBodyMedium.kR99db
-        const firstChild = $('div.rogA2c > div.Io6YTe.fontBodyMedium.kR99db:first-child');
+        const firstChild = $('div.rogA2c > div.Io6YTe.fontBodyMedium.kR99db').first();
+
 
         // If the first child element is found, extract its text content
         if (firstChild.length > 0) {
@@ -167,8 +169,8 @@ async function scrapeGoogleRestaurantData(page, url, ua) {
             const profileImg = $(element).find('img.NBa7we').attr('src');
             const name = $(element).find('div.d4r55').text().trim();
             const intro = $(element).find('div.RfnDt').text().trim();
-            const star = $(element).find('div.kvMYJc').attr('aria-label');
-            const postedTime = $(element).find('div.rsqaWe').text().trim();
+            const star = $(element).find('span.kvMYJc').attr('aria-label');
+            const postedTime = $(element).find('span.rsqaWe').text().trim();
             const reviewDesc = $(element).find('span.wiI7pd').text().trim();
             restaurantData.reviews.push({ profileImg: profileImg, name: name, intro: intro, star: star, postedTime: postedTime, reviewDesc: reviewDesc });
         });

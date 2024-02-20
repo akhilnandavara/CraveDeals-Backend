@@ -541,7 +541,7 @@ async function scrapeGoogleRestaurantData(page, url, ua) {
         restaurantData.ratings.push({ rating: rating, reviews: formattedReviews });
 
         // Selecting the first child element of div.rogA2c matching div.Io6YTe.fontBodyMedium.kR99db
-        const firstChild = $('div.rogA2c > div.Io6YTe.fontBodyMedium.kR99db:first-child');
+        const firstChild = $('div.rogA2c > div.Io6YTe.fontBodyMedium.kR99db').first();
 
         // If the first child element is found, extract its text content
         if (firstChild.length > 0) {
