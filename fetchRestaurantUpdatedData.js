@@ -13,7 +13,7 @@ exports.fetchRestaurantUpdatedData = async () => {
         // Fetch common restaurants data
         await fetchCommonRestaurants(RestaurantNames);
     } catch (error) {
-        console.error('Error executing main logic:', error);
+        console.error('Error executing main logic:', error)
     }
 };
 
@@ -25,7 +25,7 @@ async function fetchCommonRestaurants(restaurantNames) {
         const ua = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36';
 
         // Launch Puppeteer browser instance
-        const browser = await puppeteer.launch({ headless: false, defaultViewport: null });
+        const browser = await puppeteer.launch({ headless: true, defaultViewport: null });
         const page = await browser.newPage();
 
         // Iterate over restaurant names
@@ -115,8 +115,8 @@ async function fetchCommonRestaurants(restaurantNames) {
                                         description: swiggyItem.description,
                                         image: swiggyItem.image,
                                         swiggyPrice: swiggyItem.price,
-                                        zomatoPrice: zomatoItem ? zomatoItem.price : 'Not available',
-                                        magicPinPrice: magicPinItem ? magicPinItem.price : 'Not available'
+                                        zomatoPrice: zomatoItem && zomatoItem.price,
+                                        magicPinPrice: magicPinItem && magicPinItem.price
                                     };
 
                                     return combinedMenuItem;
@@ -430,8 +430,8 @@ async function scrapeZomatoRestaurantData(page, url, ua) {
         $('img.sc-s1isp7-5.eQUAyn').each((index, element) => {
             // Find image elements and extract src attribute
             const imageUrl = $(element).attr('src');
-                // Push the extracted image URL to the array
-                restaurantData.imageUrls.push(imageUrl);
+            // Push the extracted image URL to the array
+            restaurantData.imageUrls.push(imageUrl);
         });
 
         // Extract menu items

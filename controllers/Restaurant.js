@@ -28,7 +28,7 @@ exports.getRestaurantOverview=async(req,res)=> {
 
 exports.getRestaurantMenu=async(req,res)=> {
     const {restaurantId}=req.body;
-    const restaurantData = await Restaurant.findOne({ _id: restaurantId }).select({ "menu": 1 }).exec();
+    const restaurantData = await Restaurant.findOne({ _id: restaurantId }).select("name").select({ "menu": 1 }).exec();
 
     return res.json({
         success:true,

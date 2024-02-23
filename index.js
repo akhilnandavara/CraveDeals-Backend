@@ -4,7 +4,7 @@ const cors=require('cors');
 const cron = require('node-cron'); // Required node-cron and moment-timezone for scheduling tasks
 const moment = require('moment-timezone');
 
-const cuisineRoute=require('./routes/Cuisine')
+const categoryRoute=require('./routes/Category')
 const restaurantRoute=require('./routes/Restaurant')
 
 const { fetchRestaurantUpdatedData } = require('./fetchRestaurantUpdatedData');
@@ -24,7 +24,7 @@ app.use(cors({
 dbConnect()
 
 // routes
-app.use("/api/v1/cuisine",cuisineRoute)
+app.use("/api/v1/category",categoryRoute)
 app.use("/api/v1/restaurant",restaurantRoute)
 
 // default route 
@@ -36,7 +36,7 @@ app.use('/',(req,res)=>{
 })
 
 // Schedule the task to run at 8 AM Indian time
-cron.schedule('41 12 * * *', async () => {
+cron.schedule('43 18 * * *', async () => {
     console.log(`Running scheduled task at ${moment.tz('Asia/Kolkata').format()}`);
     await fetchRestaurantUpdatedData()
 }, {
