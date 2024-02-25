@@ -10,9 +10,9 @@ const {getRestaurantList,getRestaurantData, getRestaurantOverview, getRestaurant
 router.get('/getRestaurantList',getRestaurantList)
 router.post('/getRestaurantData',getRestaurantData)
 
-router.post('/getRestaurantOverview',getRestaurantOverview)
-router.post('/getRestaurantMenu',getRestaurantMenu)
-router.post('/getRestaurantReviews',getRestaurantReviews)
-router.post('/getRestaurantOffers',getRestaurantOffers)
+// router.post('/getRestaurantOverview',getRestaurantOverview)
+// router.post('/getRestaurantMenu',getRestaurantMenu)
+// router.post('/getRestaurantReviews',getRestaurantReviews)
+// router.post('/getRestaurantOffers',getRestaurantOffers)
 
 module.exports=router;
