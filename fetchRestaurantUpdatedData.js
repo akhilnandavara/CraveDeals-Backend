@@ -323,7 +323,7 @@ async function getGoogleURL(page, restaurantName) {
 
         if (closestMatch) {
             const closestRestaurantName = closestMatch[0][1]; // Get the closest matching restaurant name
-            console.log('Closest matching restaurant name:', closestRestaurantName);
+            // console.log('Closest matching restaurant name:', closestRestaurantName);
             // Extract the URL of the first search result
             const restaurantURL = await page.evaluate(() => {
                 const firstResult = document.querySelector('.Nv2PK.tH5CWc.THOPZb > a , .Nv2PK.THOPZb.CpccDe  > a');
@@ -522,9 +522,10 @@ async function scrapeGoogleRestaurantData(page, url, ua) {
         const restaurantData = {
             name: $('h1.DUwDvf.lfPIob').text().trim(),
             cuisine: '',
-            formattedOpeningHours: [],
+            operatingHours: [],
             address: '',
             url: $('div.rogA2c.ITvuef').text().trim(),
+            mapUrl: url,
             phone: '',
             ratings: [],
             reviews: [],
@@ -597,7 +598,7 @@ async function scrapeGoogleRestaurantData(page, url, ua) {
         //extract Restaurant timing
         try {
             const openingHours = $('div.t39EBf.GUrTXd').attr('aria-label').trim();
-            console.log("openingHours", openingHours);
+           
 
             if (!openingHours) {
                 throw new Error('No opening hours found.');
@@ -631,7 +632,7 @@ async function scrapeGoogleRestaurantData(page, url, ua) {
                 }
             });
 
-            restaurantData.formattedOpeningHours = formattedOpeningHours;
+            restaurantData.operatingHours = formattedOpeningHours;
         } catch (error) {
             console.error('Error processing opening hours:', error.message);
         }

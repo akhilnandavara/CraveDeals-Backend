@@ -10,7 +10,10 @@ exports.getRestaurantList=async(req,res)=> {
 
 exports.getRestaurantData=async(req,res)=> {
     const {restaurantId}=req.body;
-    const restaurantData=await Restaurant.findOne({_id:restaurantId}).select(" name cuisine images").select({'googleData.ratings':1}).exec();
+    const restaurantData = await Restaurant.findOne({_id: restaurantId})
+    .select("name cuisine images googleData.operatingHours googleData.mapUrl googleData.ratings")
+    .exec();
+
     return res.json({
         success:true,
         data:restaurantData

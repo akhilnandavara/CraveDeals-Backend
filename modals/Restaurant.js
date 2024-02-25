@@ -22,9 +22,10 @@ const restaurantSchema = new mongoose.Schema({
     googleData: {
         name: String,
         cuisine:String,
-        formattedOpeningHours:[],
+        operatingHours:[],
         address:String,
         url:String,
+        mapUrl:String,
         phone:String,
         latitude:String,
         longitude:String,
