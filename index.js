@@ -16,7 +16,7 @@ const PORT=process.env.PORT||4000;
 app.use(express.json());// json parser
 // cors
 app.use(cors({
-    origin:"https://cravedeals-git-main-akhilnandavaras-projects.vercel.app/",
+    origin:process.env.CLIENT_URL,
     credentials:true,
 }))
 
