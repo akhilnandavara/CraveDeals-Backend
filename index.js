@@ -14,11 +14,12 @@ require('dotenv').config();
 const PORT=process.env.PORT||4000;
 
 app.use(express.json());// json parser
-// cors
+
 app.use(cors({
-    origin:process.env.CLIENT_URL,
-    credentials:true,
-}))
+    origin: "https://cravedeals.vercel.app",
+    methods: ["GET", "POST", "PUT", "DELETE"] // Add additional methods as needed
+  }));
+  
 
 // connect to db
 dbConnect()
