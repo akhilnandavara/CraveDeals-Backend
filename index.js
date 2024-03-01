@@ -36,7 +36,7 @@ app.use('/',(req,res)=>{
 })
 
 // Schedule the task to run at 8 AM Indian time
-cron.schedule('06 22 * * *', async () => {
+cron.schedule('6 11 * * *', async () => {
     console.log(`Running scheduled task at ${moment.tz('Asia/Kolkata').format()}`);
     await fetchRestaurantUpdatedData()
 }, {
