@@ -18,7 +18,8 @@ app.use(express.json());// json parser
 app.use(cors({
     origin: "https://cravedeals.vercel.app",
     methods: ["GET", "POST", "PUT", "DELETE"] // Add additional methods as needed
-  }));
+}));
+// origin: "http://localhost:3000", used for locally testing
   
 
 // connect to db
