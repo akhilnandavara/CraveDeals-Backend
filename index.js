@@ -27,6 +27,7 @@ dbConnect()
 
 // routes
 app.use("/api/v1/category",categoryRoute)
+app.use("/api/v1/scrap",fetchRestaurantUpdatedData)
 app.use("/api/v1/restaurant",restaurantRoute)
 
 // default route 
@@ -46,10 +47,7 @@ app.use('/',(req,res)=>{
 //     scheduled: true,
 //     timezone: "Asia/Kolkata"
 // })
-(async()=>{
-    console.log(`Running scheduled task at ${moment.tz('Asia/Kolkata').format()}`);
-    await fetchRestaurantUpdatedData()
-})();
+
 
 
 // server  listen 
