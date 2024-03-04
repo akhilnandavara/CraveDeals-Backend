@@ -30,7 +30,8 @@ async function fetchCommonRestaurants(restaurantNames) {
             process.env.NODE_ENV === "production"
               ? process.env.PUPPETEER_EXECUTABLE_PATH
               : puppeteer.executablePath(),
-            headless: true, defaultViewport: null });
+              args: ['--no-sandbox', "--disabled-setupid-sandbox"],
+            headless: false, defaultViewport: null });
         const page = await browser.newPage();
 
         // Iterate over restaurant names
