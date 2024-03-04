@@ -37,15 +37,6 @@ app.use('/',(req,res)=>{
     })
 })
 
-const {join} = require('path');
-
-/**
- * @type {import("puppeteer").Configuration}
- */
-module.exports = {
-  // Changes the cache location for Puppeteer.
-  cacheDirectory: join(__dirname, '.cache', 'puppeteer'),
-};
 
 // Schedule the task to run at 8 AM Indian time
 cron.schedule('19 16 * * *', async () => {
