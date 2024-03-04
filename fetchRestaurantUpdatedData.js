@@ -25,7 +25,12 @@ async function fetchCommonRestaurants(restaurantNames) {
         const ua = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36';
 
         // Launch Puppeteer browser instance
-        const browser = await puppeteer.launch({ headless: true, defaultViewport: null });
+        const browser = await puppeteer.launch({
+            executablePath:
+            process.env.NODE_ENV === "production"
+              ? process.env.PUPPETEER_EXECUTABLE_PATH
+              : puppeteer.executablePath(),
+            headless: true, defaultViewport: null });
         const page = await browser.newPage();
 
         // Iterate over restaurant names
