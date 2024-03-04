@@ -23,15 +23,19 @@ async function fetchCommonRestaurants(restaurantNames) {
     try {
         // User agent string for browser
         const ua = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chromium/69.0.3497.100 Safari/537.36';
-        console.log("path",process.env.PUPPETEER_EXECUTABLE_PATH)
-        console.log("executablePath",puppeteer.executablePath())
+        console.log("path", process.env.PUPPETEER_EXECUTABLE_PATH)
+        console.log("executablePath", puppeteer.executablePath())
         // Launch Puppeteer browser instance
         const browser = await puppeteer.launch({
             executablePath:
-            process.env.NODE_ENV === "production"
-              ? process.env.PUPPETEER_EXECUTABLE_PATH
-              : puppeteer.executablePath(),
-            headless: true, defaultViewport: null });
+                process.env.NODE_ENV === "production"
+                    ? process.env.PUPPETEER_EXECUTABLE_PATH
+                    : puppeteer.executablePath(),
+
+            args: ["--no-sandbox",
+                "--disable-setuid-sandbox"],
+            headless: true, defaultViewport: null
+        });
         const page = await browser.newPage();
 
         // Iterate over restaurant names
@@ -604,7 +608,7 @@ async function scrapeGoogleRestaurantData(page, url, ua) {
         //extract Restaurant timing
         try {
             const openingHours = $('div.t39EBf.GUrTXd').attr('aria-label').trim();
-           
+
 
             if (!openingHours) {
                 throw new Error('No opening hours found.');
