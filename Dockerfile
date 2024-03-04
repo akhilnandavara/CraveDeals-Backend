@@ -8,4 +8,4 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 RUN yarn install
 COPY . .
-CMD [ "nodemon", "index.js" ]
+CMD [ "node", "index.js" ]
