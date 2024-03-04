@@ -23,7 +23,8 @@ async function fetchCommonRestaurants(restaurantNames) {
     try {
         // User agent string for browser
         const ua = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chromium/69.0.3497.100 Safari/537.36';
-
+        console.log("path",process.env.PUPPETEER_EXECUTABLE_PATH)
+        console.log("executablePath",puppeteer.executablePath())
         // Launch Puppeteer browser instance
         const browser = await puppeteer.launch({
             executablePath:
