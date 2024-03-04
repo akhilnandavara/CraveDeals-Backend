@@ -19,8 +19,8 @@ app.use(cors({
     origin: "https://cravedeals.vercel.app",
     methods: ["GET", "POST", "PUT", "DELETE"] // Add additional methods as needed
 }));
-// origin: "http://localhost:3000", used for locally testing
-  
+
+// origin: "http://localhost:3000",// used for locally testing
 
 // connect to db
 dbConnect()
@@ -38,7 +38,7 @@ app.use('/',(req,res)=>{
 })
 
 // Schedule the task to run at 8 AM Indian time
-cron.schedule('6 11 * * *', async () => {
+cron.schedule('0 16 * * *', async () => {
     console.log(`Running scheduled task at ${moment.tz('Asia/Kolkata').format()}`);
     await fetchRestaurantUpdatedData()
 }, {
