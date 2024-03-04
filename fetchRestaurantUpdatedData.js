@@ -32,8 +32,12 @@ async function fetchCommonRestaurants(restaurantNames) {
                     ? process.env.PUPPETEER_EXECUTABLE_PATH
                     : puppeteer.executablePath(),
 
-            args: ["--no-sandbox",
-                "--disable-setuid-sandbox"],
+                    args: [
+                        "--disable-setuid-sandbox",
+                        "--no-sandbox",
+                        "--single-process",
+                        "--no-zygote",
+                      ],
             headless: true, defaultViewport: null
         });
         const page = await browser.newPage();
