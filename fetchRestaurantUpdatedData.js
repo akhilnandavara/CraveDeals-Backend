@@ -36,9 +36,11 @@ async function fetchCommonRestaurants(restaurantNames) {
 
         console.log('after launching browser')
         const page = await browser.newPage();
-        
-        console.log('Case 3 - Width  :', page.viewport().width);  // Width  : 1920
-        console.log('Case 3 - Height :', page.viewport().height); // Height : 1080
+
+        // Get the viewport size
+        const viewportSize = await page.viewport();
+
+        console.log('Viewport size:', viewportSize);
 
         // Iterate over restaurant names
         for (const restaurantName of restaurantNames) {
