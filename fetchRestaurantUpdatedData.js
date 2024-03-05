@@ -28,7 +28,9 @@ async function fetchCommonRestaurants(restaurantNames) {
         
         // Launch Puppeteer browser instance
         const browser = await puppeteer.launch({
-            ignoreDefaultArgs: ['--disable-extensions'],
+            args: [
+                '--window-size=1920,1080',
+              ],
             headless: true, defaultViewport: null
         });
         
