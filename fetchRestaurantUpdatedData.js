@@ -25,17 +25,20 @@ async function fetchCommonRestaurants(restaurantNames) {
     try {
         // User agent string for browser
         const ua = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36';
-        
+
         // Launch Puppeteer browser instance
         const browser = await puppeteer.launch({
             args: [
                 '--window-size=1920,1080',
-              ],
+            ],
             headless: true, defaultViewport: null
         });
-        
+
         console.log('after launching browser')
         const page = await browser.newPage();
+        
+        console.log('Case 3 - Width  :', page.viewport().width);  // Width  : 1920
+        console.log('Case 3 - Height :', page.viewport().height); // Height : 1080
 
         // Iterate over restaurant names
         for (const restaurantName of restaurantNames) {
