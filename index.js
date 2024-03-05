@@ -9,6 +9,7 @@ const restaurantRoute=require('./routes/Restaurant')
 
 const { fetchRestaurantUpdatedData } = require('./fetchRestaurantUpdatedData');
 const { dbConnect } = require('./mongoDBHelper');
+const { scrapRestaurantdata } = require('./scrapData');
 require('dotenv').config();
 
 const PORT=process.env.PORT||4000;
@@ -28,7 +29,7 @@ dbConnect()
 
 const scrapRestaurant=async()=>{
     console.log("Scraping the restaurant data....")
-    await fetchRestaurantUpdatedData()
+    await scrapRestaurantdata()
 }
 
 
