@@ -28,9 +28,10 @@ async function fetchCommonRestaurants(restaurantNames) {
         
         // Launch Puppeteer browser instance
         const browser = await puppeteer.launch({
-           
-            headless: false, defaultViewport: null
+            ignoreDefaultArgs: ['--disable-extensions'],
+            headless: true, defaultViewport: null
         });
+        console.log('after launching browser')
         const page = await browser.newPage();
 
         // Iterate over restaurant names
