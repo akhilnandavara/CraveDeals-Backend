@@ -282,9 +282,10 @@ async function getSwiggyURL(page, restaurantName) {
     try {
         // Navigate to Swiggy's website
         await page.goto('https://www.swiggy.com/search');
-
+        console.log("after going to swiggy website...")
         // Wait for the search input field to appear
         await page.waitForSelector('input[class="_2FkHZ"]', { timeout: 10000 });
+        console.log("after going to swiggy page load...")
 
         // Clear the search input field and type the restaurant name
         await page.$eval('input[class="_2FkHZ"]', inputField => inputField.value = '');
