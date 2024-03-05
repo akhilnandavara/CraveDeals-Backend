@@ -29,10 +29,10 @@ async function fetchCommonRestaurants(restaurantNames) {
         // Launch Puppeteer browser instance
         const browser = await puppeteer.launch({
               defaultViewport: {
-                width: 800,
-                height: 600,
+                width: 1700,
+                height: 800,
               },
-            headless: false
+            headless: true,
         });
 
         console.log('after launching browser')
