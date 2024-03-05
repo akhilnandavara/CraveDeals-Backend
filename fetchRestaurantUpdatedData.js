@@ -31,7 +31,7 @@ async function fetchCommonRestaurants(restaurantNames) {
             args: [
                 '--window-size=1920,1080',
             ],
-            headless: true, defaultViewport: null
+            headless: true
         });
 
         console.log('after launching browser')
