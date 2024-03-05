@@ -31,6 +31,7 @@ async function fetchCommonRestaurants(restaurantNames) {
             ignoreDefaultArgs: ['--disable-extensions'],
             headless: true, defaultViewport: null
         });
+        
         console.log('after launching browser')
         const page = await browser.newPage();
 
