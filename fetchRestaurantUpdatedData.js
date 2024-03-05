@@ -33,6 +33,7 @@ async function fetchCommonRestaurants(restaurantNames) {
                 height: 800,
               },
             headless: true,
+            args: ['--no-sandbox', '--disable-setuid-sandbox']
         });
 
         console.log('after launching browser')
