@@ -32,7 +32,7 @@ async function fetchCommonRestaurants(restaurantNames) {
                 width: 800,
                 height: 600,
               },
-            headless: true
+            headless: false
         });
 
         console.log('after launching browser')
