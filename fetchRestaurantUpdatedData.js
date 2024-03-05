@@ -11,7 +11,9 @@ const fuzzball = require('fuzzball');
 exports.fetchRestaurantUpdatedData = async () => {
     try {
         // Fetch common restaurants data
+        console.log('Fetching common restaurants data...')
         await fetchCommonRestaurants(RestaurantNames);
+        console.log('after fetching common restaurants data...')
     } catch (error) {
         console.error('Error executing main logic:', error)
     }
@@ -27,7 +29,7 @@ async function fetchCommonRestaurants(restaurantNames) {
         // Launch Puppeteer browser instance
         const browser = await puppeteer.launch({
            
-            headless: true, defaultViewport: null
+            headless: false, defaultViewport: null
         });
         const page = await browser.newPage();
 

@@ -25,9 +25,16 @@ app.use(cors({
 // connect to db
 dbConnect()
 
+
+const scrapRestaurant=async()=>{
+    console.log("Scraping the restaurant data....")
+    await fetchRestaurantUpdatedData()
+}
+
+
 // routes
 app.use("/api/v1/category",categoryRoute)
-app.use("/api/v1/scrap",fetchRestaurantUpdatedData)
+app.use("/api/v1/scrap",scrapRestaurant)
 app.use("/api/v1/restaurant",restaurantRoute)
 
 // default route 
@@ -47,7 +54,6 @@ app.use('/',(req,res)=>{
 //     scheduled: true,
 //     timezone: "Asia/Kolkata"
 // })
-
 
 
 // server  listen 
