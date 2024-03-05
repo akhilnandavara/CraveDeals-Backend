@@ -28,16 +28,17 @@ async function fetchCommonRestaurants(restaurantNames) {
 
         // Launch Puppeteer browser instance
         const browser = await puppeteer.launch({
-            args: [
-                '--window-size=1920,1080',
-            ],
+              defaultViewport: {
+                width: 800,
+                height: 600,
+              },
             headless: true
         });
 
         console.log('after launching browser')
         const page = await browser.newPage();
 
-        // Get the viewport size
+
         const viewportSize = await page.viewport();
 
         console.log('Viewport size:', viewportSize);
