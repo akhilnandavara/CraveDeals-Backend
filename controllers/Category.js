@@ -3,8 +3,7 @@ const Restaurant=require('../modals/Restaurant')
 exports.fetchCategoryData=async(req,res)=> {
     try {
         const {categoryName}=req.body;
-        console.log(req.body)
-        console.log("category at BackEnd",categoryName)
+        
         if(!categoryName){
             return res.status(400).json({success:false,message:"Missinge Category"})
         }

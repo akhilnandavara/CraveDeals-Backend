@@ -1,65 +1,52 @@
-﻿
-# Restaurant Data Scraper
+﻿# CraveDeals Backend
 
-This Node.js script is designed to scrape restaurant data from various sources, including Google Maps, Swiggy, Zomato, and MagicPin. The scraped data includes information such as restaurant name, ratings, reviews, offers, and menu items. The extracted data can be stored or updated in a MongoDB database for further analysis.
+The backend component of CraveDeals is responsible for managing data retrieval, storage, and serving API requests to the frontend. Here's an overview of the backend architecture and technologies used:
 
-## Prerequisites
+## Overview
 
-Before running the script, ensure you have the following installed:
+CraveDeals backend utilizes MongoDB for data storage, Puppeteer and Cheerio for web scraping, and Express.js for API routing. It provides RESTful endpoints for frontend consumption.
 
-- Node.js
-- MongoDB (optional, required if you want to store data in a database)
-- Puppeteer
+## Technologies Used
 
-## Getting Started
+- **Node.js**: Backend server environment.
+- **Express.js**: Web application framework for Node.js.
+- **MongoDB and Mongoose**: NoSQL database and object modeling for Node.js.
+- **Puppeteer and Cheerio**: Tools for web scraping.
+- **CORS**: Cross-Origin Resource Sharing to manage frontend API calls.
 
-1. Clone the repository to your local machine:
+## Installation and Setup
 
-```bash
-git clone https://github.com/akhilnandavara/Food-Price-Comparsion.git
-```
+1. Clone the backend repository from GitHub: [CraveDeals Backend Repository](https://github.com/akhilnandavara/CraveDeals-Backend).
+2. Navigate to the project directory and install dependencies using yarn:
 
-2. Navigate to the project directory:
+    ```
+    yarn install
+    ```
 
-```bash
-cd restaurant-data-scraper
-```
+3. Configure MongoDB connection settings in the application configuration file.
+4. Run the backend server:
 
-3. Install dependencies:
+    ```
+    node index.js or nodemon index.js
+    ```
 
-```bash
-npm install
-```
+5. The backend server will start running and will be ready to serve API requests from the frontend.
 
-4. Set up environment variables:
-
-Create a `.env` file in the project directory and add the necessary environment variables. Example:
-
-```env
-MONGODB_URI=your-mongodb-uri
-```
-
-## Usage
-
-1. Customize the scraping logic in the `scraper.js` file to meet your requirements.
-
-2. Run the scraper:
-
-```bash
-node scraper.js
-```
-
-3. The script will fetch data for common restaurants from various sources, process it, and store or update the information in MongoDB.
-
-## Configuration
-
-- Adjust the scraping logic in `scraper.js` based on the structure and behavior of the target websites.
-- Configure MongoDB connection settings in `.env` if you plan to use MongoDB for storing data.
+## API Endpoints
+-**POST /api/v1/category/getCategoryData**: Retrieves a list of restaurants for specific category by Name
+- **GET /api/v1/restaurant/getRestaurantList**: Retrieves a list of all the  restaurants from the database.
+- **POST /api/v1/restaurant/getRestaurantData**: Retrieves details of a specific restaurant by ID.
 
 ## Contributing
 
-Contributions are welcome! Feel free to open issues or submit pull requests to improve the scraper or add new features.
+Contributions to CraveDeals are welcome! This project is primarily intended for educational purposes and not for commercial use. If you find any issues or have suggestions for improvements, please open an issue or submit a pull request on the GitHub repository.
+
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This backend component of CraveDeals is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- Thanks to the developers of Swiggy, Zomato, and Magicpin for providing public APIs and data accessibility.
+- Special thanks to the open-source community for valuable resources and inspiration.

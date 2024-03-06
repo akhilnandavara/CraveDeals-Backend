@@ -9,7 +9,6 @@ const restaurantRoute=require('./routes/Restaurant')
 
 const { fetchRestaurantUpdatedData } = require('./fetchRestaurantUpdatedData');
 const { dbConnect } = require('./mongoDBHelper');
-const { scrapRestaurantdata } = require('./scrapData');
 require('dotenv').config();
 
 const PORT=process.env.PORT||4000;
@@ -20,22 +19,14 @@ app.use(cors({
     origin: "https://cravedeals.vercel.app",
     methods: ["GET", "POST", "PUT", "DELETE"] // Add additional methods as needed
 }));
-// origin: "http://localhost:3000",// used for locally testing
 
+// origin: "http://localhost:3000",// used for locally testing
 
 // connect to db
 dbConnect()
 
-
-const scrapRestaurant=async()=>{
-    console.log("Scraping the restaurant data....")
-    await scrapRestaurantdata()
-}
-
-
 // routes
 app.use("/api/v1/category",categoryRoute)
-app.use("/api/v1/scrap",scrapRestaurant)
 app.use("/api/v1/restaurant",restaurantRoute)
 
 // default route 
@@ -47,8 +38,8 @@ app.use('/',(req,res)=>{
 })
 
 
-// Schedule the task to run at 8 AM Indian time
-// cron.schedule('46 20 * * *', async () => {
+// Schedule the task to run at 11 AM Indian time // chrome headless fails  in render.com
+// cron.schedule('0 11 * * *', async () => {
 //     console.log(`Running scheduled task at ${moment.tz('Asia/Kolkata').format()}`);
 // await fetchRestaurantUpdatedData()
 // }, {
