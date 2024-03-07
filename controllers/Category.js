@@ -1,26 +1,45 @@
-const Restaurant=require('../modals/Restaurant')
+const Restaurant = require('../modals/Restaurant');
 
-exports.fetchCategoryData=async(req,res)=> {
+exports.fetchCategoryData = async (req, res) => {
     try {
-        const {categoryName}=req.body;
-        
-        if(!categoryName){
-            return res.status(400).json({success:false,message:"Missinge Category"})
+        const { searchTerm } = req.body;
+       
+        // Check if a search term is provided
+        if (!searchTerm) {
+            return res.status(400).json({ success: false, message: "Please provide a search term" });
         }
-        const categoryData=await Restaurant.find({cuisine:categoryName}).select('name cuisine images').select({'googleData.ratings':1}).exec();
+
+        // Construct query to search across multiple fields
+        const query = {
+            $or: [
+                { cuisine: { $regex: searchTerm, $options: 'i' } }, // Search cuisine
+                { name: { $regex: searchTerm, $options: 'i' } }, // Search restaurant name
+                { 'menu': { $elemMatch: { 
+                    $or: [
+                        { 'menuSectionHeading': { $regex: searchTerm, $options: 'i' } }, // Search menu section heading
+                        { 'menuItems.name': { $regex: searchTerm, $options: 'i' } } // Search menu item name
+                    ]
+                }}}
+            ]
+        };
+
+        // Fetch data based on the constructed query
+        const categoryData = await Restaurant.find(query)
+            .select('name cuisine images')
+            .select({ 'googleData.ratings': 1 })
+            .exec();
 
         return res.json({
-            success:true,
-            data:categoryData,
-            message:"category Fetched Successfully"
-        })
+            success: true,
+            data: categoryData,
+            message: "Category fetched successfully"
+        });
     } catch (error) {
-        console.log(error)
+        console.log(error);
         return res.status(500).json({
             success: false,
             error: error.message,
             message: 'Internal server error'
-        })
+        });
     }
-    
-}
+};
