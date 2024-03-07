@@ -11,13 +11,30 @@ const fuzzball = require('fuzzball');
 exports.fetchRestaurantUpdatedData = async () => {
     try {
         // Fetch common restaurants data
-        console.log('Fetching common restaurants data...')
+      
         await fetchCommonRestaurants(RestaurantNames);
-        console.log('after fetching common restaurants data...')
+       
     } catch (error) {
         console.error('Error executing main logic:', error)
     }
 };
+
+// Function to find the closest matching URL for the given restaurant name
+function findClosestMatchURL(restaurantName, magicpinUrls) {
+    let bestMatch = { ratio: 0, url: '' };
+
+    for (let url of magicpinUrls) {
+        // Extract the segment of the URL before "store" for comparison
+        const nameInUrl = url.split('/store/')[0].split('/').pop().replace(/-/g, ' ').toLowerCase();
+        const ratio = fuzzball.partial_ratio(restaurantName.toLowerCase(), nameInUrl);
+        if (ratio > bestMatch.ratio) {
+            bestMatch = { ratio, url };
+        }
+    }
+
+    return bestMatch.url;
+}
+
 
 // Function to fetch data for common restaurant
 async function fetchCommonRestaurants(restaurantNames) {
@@ -36,13 +53,8 @@ async function fetchCommonRestaurants(restaurantNames) {
             args: ['--no-sandbox', '--disable-setuid-sandbox']
         });
 
-        console.log('after launching browser')
         const page = await browser.newPage();
 
-
-        const viewportSize = await page.viewport();
-
-        console.log('Viewport size:', viewportSize);
 
         // Iterate over restaurant names
         for (const restaurantName of restaurantNames) {
@@ -97,7 +109,8 @@ async function fetchCommonRestaurants(restaurantNames) {
                     retryCount = 0;
 
                     // Find the MagicPin URL for the current restaurant
-                    const magicPinURL = magicpinUrls.find(url => url.toLowerCase().includes(restaurantName.replace(/\s/g, '-').trim().toLowerCase()));
+                    const magicPinURL = findClosestMatchURL(restaurantName.replace(/\s/g, '-').trim(), magicpinUrls);
+
 
                     if (magicPinURL) {
                         // Fetch data from MagicPin
@@ -282,10 +295,8 @@ async function getSwiggyURL(page, restaurantName) {
     try {
         // Navigate to Swiggy's website
         await page.goto('https://www.swiggy.com/search');
-        console.log("after going to swiggy website...")
         // Wait for the search input field to appear
         await page.waitForSelector('input[class="_2FkHZ"]', { timeout: 10000 });
-        console.log("after going to swiggy page load...")
 
         // Clear the search input field and type the restaurant name
         await page.$eval('input[class="_2FkHZ"]', inputField => inputField.value = '');
@@ -340,7 +351,7 @@ async function getGoogleURL(page, restaurantName) {
 
         if (closestMatch) {
             const closestRestaurantName = closestMatch[0][1]; // Get the closest matching restaurant name
-            // console.log('Closest matching restaurant name:', closestRestaurantName);
+            console.log('Closest matching restaurant name:', closestRestaurantName);
             // Extract the URL of the first search result
             const restaurantURL = await page.evaluate(() => {
                 const firstResult = document.querySelector('.Nv2PK.tH5CWc.THOPZb > a , .Nv2PK.THOPZb.CpccDe  > a');

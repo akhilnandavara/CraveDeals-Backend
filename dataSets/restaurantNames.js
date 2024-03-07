@@ -1,4 +1,1 @@
-// exports.RestaurantNames = ['McDonalds','Truffles','Burger King', 'Dominoz', 'Pizza Hut', 'Subway', 'FreshMenu', 'Behrouz Biryani', 'Biyani Blues']
-exports.RestaurantNames = ['Meghana Foods', 'Truffles' , 'Dominos Pizza','Subway','Kfc','La PinoZ Pizza','Andhra Gunpowder','Biryani Blues','Behrouz Biryani','A2B - Adyar Ananda Bhavan','Freshmenu',]
-// exports.RestaurantNames = ['Meghana Foods', 'Truffles']
-// exports.RestaurantNames = ['Dominos Pizza']
+exports.RestaurantNames = ['Meghana Foods', 'Truffles', 'Dominos Pizza', 'Subway', 'Kfc', 'La PinoZ Pizza','Andhra Gunpowder','Biryani Blues','Behrouz Biryani','A2B - Adyar Ananda Bhavan', 'Freshmenu', 'Kanti Sweets', 'Asha Sweet Center - Since 1951','Nandhana Palace','Starbucks Coffee','Chai Point','CakeZone','Polar Bear','Al-Bek','Juice Junction','Chaatimes','IDC Kitchen','HaldiramS Restaurant','Glens Bakehouse','Kwality Walls Frozen Dessert And Ice Cream Shop']
